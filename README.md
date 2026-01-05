@@ -1,33 +1,53 @@
-# 🐦 Twitter Scraper CLI (Tweepy + JSON Export)
+# 🌐 Global Web Scraper
 
-A simple Python CLI tool that uses the Twitter API v2 to scrape a user's tweets and optionally export them as a JSON file.
+A general-purpose Python web scraper that extracts data from any website while respecting the `robots.txt` exclusion standard.
 
-## ⚙️ Features
+## 🚀 Features
 
-- 🔐 Uses a `.env` file to store your **Bearer Token**
-- ✅ Scrapes latest tweets from any **public Twitter account**
-- 📁 Exports tweets (with timestamp) to a `.json` file in `scrapped-data/`
-- 🛡 Handles rate limits, invalid usernames, and private accounts
-- 🎯 Simple CLI interface
+- **Robots.txt Compliant**: Automatically checks the target website's `robots.txt` to ensure scraping is allowed.
+- **Generic Extraction**: Captures titles, meta descriptions, headings, paragraphs, and links.
+- **JSON Export**: Saves extracted data to structured JSON files in the `scrapped-data/` directory.
+- **Configurable**: Customizable User-Agent via `.env`.
+- **Pure Python**: Built with functional programming patterns (no Classes/OOP).
 
----
+## 🛠️ Setup
 
-## 🖥 Preview
+1.  **Clone the repository** (if you haven't already).
+2.  **Install dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Configure Environment**:
+    Rename `.env.example` to `.env` (optional, to set a custom User-Agent).
+    ```bash
+    cp .env.example .env
+    ```
 
-- Enter Twitter username to scrape: elonmusk
-- How many tweets to scrape (max 100)? 5
-- Do you want JSON of your scraped tweets? (Yes/No) yes
-- ✅ Saved to scrapped-data/elonmusk-tweets.json
+## 💻 Usage
 
-
----
-
-## 📦 Requirements
-
-- Python 3.7+
-- Twitter Developer account (for Bearer Token)
-
-Install dependencies:
+Run the `main.py` script:
 
 ```bash
-pip install tweepy python-dotenv
+python main.py
+```
+
+1.  Enter the URL you want to scrape (e.g., `https://example.com`).
+2.  The script will:
+    *   Check `robots.txt` permissions.
+    *   Fetch the HTML.
+    *   Parse the content.
+    *   Save the result to `scrapped-data/<domain>_data.json`.
+
+## 📁 Output Structure
+
+The output JSON contains:
+- `url`: Source URL.
+- `title`: Page title.
+- `meta_description`: Meta description tag content.
+- `headings`: List of h1-h3 tags.
+- `content_snippet`: First few paragraphs.
+- `links`: First 20 links found on the page.
+
+## ⚠️ Disclaimer
+
+This tool is for educational purposes. Always respect website terms of service and robots.txt rules (which this tool attempts to do automatically).
